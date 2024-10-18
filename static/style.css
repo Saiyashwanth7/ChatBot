@@ -1,0 +1,191 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: #f5f7fb;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    padding: 20px;
+}
+
+/* Chat Wrapper adjusts with screen size */
+.chat-wrapper {
+    width: 100%;
+    max-width: 100vw;  /* Full width of the viewport */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.chat-container {
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 80vw;  /* Adjusts with screen size */
+    height: 80vh;     /* Chatbox height adapts to viewport height */
+    max-height: 90vh; /* Set maximum height to 90% of the viewport */
+    border-radius: 15px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.chat-header {
+    background-color: #4b0082;
+    color: #ffffff;
+    padding: 15px;
+    text-align: center;
+    border-radius: 15px 15px 0 0;
+}
+
+.chat-header h1 {
+    font-size: 2.2rem;  /* Scales with screen size */
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.chat-header p {
+    font-size: 1rem;
+    font-weight: 300;
+}
+
+.chat-box {
+    padding: 20px;
+    background-color: #f5f7fb;
+    flex-grow: 1;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.message {
+    display: flex;
+    width: auto;
+    max-width: 70%;  /* Message bubbles take up 70% of the container width */
+    padding: 15px;
+    border-radius: 25px;
+    font-size: 1rem;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    line-height: 1.4;
+    word-wrap: break-word;
+    animation: fade-in 0.3s ease-in-out;
+}
+
+.bot-message {
+    background-color: #e4e9f1;
+    align-self: flex-start;
+    border-radius: 25px 25px 25px 5px;
+}
+
+.user-message {
+    background-color: #4b0082;
+    color: white;
+    align-self: flex-end;
+    border-radius: 25px 25px 5px 25px;
+}
+
+.input-container {
+    display: flex;
+    padding: 15px;
+    background-color: #ffffff;
+    border-top: 1px solid #e4e9f1;
+}
+
+#message-input {
+    flex-grow: 1;
+    padding: 15px;
+    border-radius: 25px;
+    border: 1px solid #d0d4db;
+    font-size: 1rem;
+    transition: border-color 0.3s ease;
+    outline: none;
+}
+
+#message-input:focus {
+    border-color: #4b0082;
+}
+
+#send-btn {
+    background-color: #4b0082;
+    color: white;
+    border: none;
+    padding: 15px;
+    border-radius: 50%;
+    margin-left: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+    font-size: 1.2rem;
+}
+
+#send-btn:hover {
+    background-color: #3a0068;
+}
+
+/* Add smooth appearance of messages */
+@keyframes fade-in {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Media queries for specific screen adjustments */
+
+/* For large desktops */
+@media (min-width: 1200px) {
+    .chat-container {
+        max-width: 60vw;  /* Set max width for large screens */
+    }
+
+    .chat-header h1 {
+        font-size: 2.5rem;  /* Larger text for bigger screens */
+    }
+}
+
+/* For tablets and medium devices */
+@media (max-width: 768px) {
+    .chat-container {
+        max-width: 90vw;
+        height: 70vh; /* Adjust height for medium devices */
+    }
+
+    .message {
+        max-width: 80%;
+    }
+}
+
+/* For mobile devices */
+@media (max-width: 480px) {
+    .chat-container {
+        max-width: 100vw;
+        height: 85vh;  /* Full viewport height for mobile */
+    }
+
+    .message {
+        max-width: 90%;
+    }
+
+    .chat-header h1 {
+        font-size: 1.8rem;  /* Smaller text for mobile */
+    }
+
+    #send-btn {
+        padding: 12px;
+    }
+
+    #message-input {
+        padding: 12px;
+    }
+}
