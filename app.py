@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request, jsonify
-import openai
+import cohere
 import os
 from dotenv import load_dotenv
 
@@ -9,13 +9,12 @@ load_dotenv()
 # Initialize Flask app
 app = Flask(__name__)
 
-# Load your OpenAI API key from the environment variable
-openai.api_key = os.getenv("OPENAI_API_KEY")
+# Load your Cohere API key from the environment variable
+co = cohere.Client(os.getenv("COHERE_API_KEY"))
 
 @app.route('/')
 def home():
     return render_template('view.html')
-
 
 # Define the /api route to handle POST requests
 @app.route("/api", methods=["POST"])
@@ -24,15 +23,15 @@ def api():
     message = request.json.get("message")
     
     try:
-        # Send the message to OpenAI's API and receive the response
-        response = openai.ChatCompletion.create(
-            model="gpt-3.5-turbo",
-            messages=[
-                {"role": "user", "content": message}
-            ]
-        )
+        # Send the message to Cohere's API and receive the response
+        response = co.chat(
+        message=message,
+        model="command",
+        temperature=0.3
+    )
+
         # Extract the response content
-        response_message = response['choices'][0]['message']['content']
+        response_message = response.text
         return jsonify({"response": response_message})
 
     except Exception as e:
